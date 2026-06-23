@@ -2,6 +2,7 @@ extends Node
 
 @onready var animator: AnimatedSprite2D = %Animator
 
+
 @export var groundSpeed: float
 @export var maxGroundSpeed: float
 @export var airSpeed: float
@@ -9,11 +10,20 @@ extends Node
 @export var liftSpeed: float
 @export var maxLiftSpeed: float
 @export var jumpForce: float
+@export	var maxJumpChargeTime: float
+@export var downBias: float
+
 
 var moveDirection = 0
+var isCharging: bool = false
+var jumpChargeTime = 0
 var isFlying: bool = false
+var isGrappling: bool = false
 
-
+func _process(delta: float) -> void:
+	if isCharging:
+		jumpChargeTime += delta
+		jumpChargeTime = clampf(jumpChargeTime, 0.0, maxJumpChargeTime)
 func set_direction(direction: float):
 	moveDirection = direction
 	
@@ -21,20 +31,23 @@ func move_update(delta):
 	if not owner.is_on_floor():
 		var target_velocity = moveDirection * airSpeed
 		owner.velocity.x = clampf(target_velocity, -maxAirSpeed, maxAirSpeed)
-	else:  
-		owner.velocity.x = moveDirection
-	
+	else:
+		owner.velocity.x = 0
 	if moveDirection != 0:
 		animator.flip_h = moveDirection < 0
 	
-
+func start_jump_charge():
+	isCharging = true
+	
 func jump():
 	if owner.is_on_floor():
-		print("Trying Jump")
-		owner.velocity.y += -jumpForce
+		owner.velocity.y += -jumpForce * jumpChargeTime
+		jumpChargeTime = 0
+	isCharging = false
+	
 		
 func set_flying(boolean: bool):
-	if owner.velocity.y > 0 or isFlying:
+	if owner.velocity.y > 50 or isFlying:
 		isFlying = boolean
 		
 func fly_update(delta):
@@ -43,7 +56,7 @@ func fly_update(delta):
 		
 	var acceleration = liftSpeed * delta
 	owner.velocity.y = move_toward(owner.velocity.y, -maxLiftSpeed, acceleration)
-	owner.velocity.y += 180 * delta
+	owner.velocity.y += downBias * delta
 	print (owner.velocity.y)
 		
 

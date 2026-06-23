@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cj8c1sgruih7v"]
+
+[ext_resource type="Texture2D" uid="uid://bl6d6gokl6mc1" path="res://Sprites/Fly.png" id="1_slkfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slkfb"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06xii"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei7ia"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06m4p"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hydy"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4tlb"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y88vc"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15xki"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt3t0"]
+atlas = ExtResource("1_slkfb")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fre1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slkfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06xii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei7ia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06m4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hydy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4tlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y88vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15xki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt3t0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kl1sf"]
+radius = 34.0
+
+[node name="FlyFood" type="Area2D" unique_id=641732646 groups=["Grapple"]]
+collision_layer = 4
+gravity = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218166018]
+sprite_frames = SubResource("SpriteFrames_fre1k")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.5335513
+
+[node name="GrapplePoint" type="Marker2D" parent="." unique_id=1223905276 groups=["Grapple"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1819072303 groups=["Grapple"]]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_kl1sf")
