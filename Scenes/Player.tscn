@@ -561,14 +561,11 @@ radius = 5.9999294
 height = 23.999718
 
 [node name="Player" type="CharacterBody2D" unique_id=1391286059 groups=["Player"]]
-light_mask = 3
 collision_mask = 14
 script = ExtResource("1_dewec")
 
 [node name="Animator" type="AnimatedSprite2D" parent="." unique_id=138971320]
 unique_name_in_owner = true
-light_mask = 3
-visibility_layer = 3
 sprite_frames = SubResource("SpriteFrames_gntrk")
 animation = &"Idle"
 
@@ -581,6 +578,7 @@ shape = SubResource("CapsuleShape2D_3rw25")
 position = Vector2(0, -78)
 process_callback = 0
 limit_left = -240
+limit_top = -5355
 limit_right = 240
 limit_bottom = 36
 limit_smoothed = true

@@ -70,6 +70,8 @@ Grapple={
 
 [layer_names]
 
+2d_render/layer_1="Player"
+2d_render/layer_2="Environment"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Food"
@@ -83,3 +85,5 @@ Grapple={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfymbjt05754x"
-path="res://.godot/imported/Tower.png-b6a43782122c46559d2baaac5ad11f6a.ctex"
+uid="uid://35fxph1d8oos"
+path="res://.godot/imported/Tower BackGround.png-486388f314e9f37e57d60c596a5f77a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tower.png"
-dest_files=["res://.godot/imported/Tower.png-b6a43782122c46559d2baaac5ad11f6a.ctex"]
+source_file="res://Sprites/Tower BackGround.png"
+dest_files=["res://.godot/imported/Tower BackGround.png-486388f314e9f37e57d60c596a5f77a2.ctex"]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=1
+compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
