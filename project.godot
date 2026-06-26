@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 InputBus="*uid://ckir87rth60rx"
 FadeManager="*uid://dv1g6l2casp6p"
+MusicManager="*uid://dycnnapu52xas"
 
 [debug]
 
@@ -36,6 +37,7 @@ window/size/window_height_override=540
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=0
 
 [global_group]
 

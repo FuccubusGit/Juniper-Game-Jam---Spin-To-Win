@@ -3,6 +3,8 @@
 [ext_resource type="Shader" uid="uid://xvewsr4hrcym" path="res://Scenes/Fog.gdshader" id="1_1pj3s"]
 [ext_resource type="PackedScene" uid="uid://bpf2empbdd5m6" path="res://Scenes/Player.tscn" id="1_76ciu"]
 [ext_resource type="Texture2D" uid="uid://dfymbjt05754x" path="res://Sprites/Tower.png" id="1_omj1r"]
+[ext_resource type="Shader" uid="uid://66xftih27d17" path="res://Shaders/Tower.gdshader" id="2_tolab"]
+[ext_resource type="Script" uid="uid://dsc5hqxbda74i" path="res://Scripts/tower.gd" id="3_3lbbe"]
 [ext_resource type="Texture2D" uid="uid://b33w33hj65e1s" path="res://Sprites/lampada fiamma.png" id="3_yfk4l"]
 [ext_resource type="Texture2D" uid="uid://dlf3tia4aesrq" path="res://Sprites/torcia.png" id="4_mbfsj"]
 [ext_resource type="PackedScene" uid="uid://drvurn5ajf453" path="res://Scenes/bird.tscn" id="6_qfxak"]
@@ -26,6 +28,9 @@ shader = ExtResource("1_1pj3s")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_t26mr")
 shader_parameter/density = 0.25
 shader_parameter/speed = Vector2(0.02, 0.01)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tolab"]
+shader = ExtResource("2_tolab")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omj1r"]
 size = Vector2(136, 13)
@@ -443,8 +448,11 @@ collision_mask = 7
 
 [node name="Sprite2D" type="Sprite2D" parent="Collision Shapes" unique_id=703119342]
 light_mask = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_tolab")
 position = Vector2(0, -2663)
 texture = ExtResource("1_omj1r")
+script = ExtResource("3_3lbbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision Shapes" unique_id=954784783]
 position = Vector2(6, 29.5)
@@ -761,6 +769,78 @@ position = Vector2(-56, -3773)
 [node name="FlyFood11" parent="Food" unique_id=665782842 instance=ExtResource("7_t26mr")]
 position = Vector2(73, -3908)
 
+[node name="GoldenFly2" parent="Food" unique_id=985332079 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4282)
+
+[node name="GoldenFly3" parent="Food" unique_id=988429656 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4232)
+
+[node name="GoldenFly4" parent="Food" unique_id=1287159568 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4329)
+
+[node name="GoldenFly5" parent="Food" unique_id=1124773589 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4379)
+
+[node name="GoldenFly6" parent="Food" unique_id=1322898161 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4412)
+
+[node name="GoldenFly7" parent="Food" unique_id=1722224418 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4522)
+
+[node name="GoldenFly8" parent="Food" unique_id=1880948557 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4472)
+
+[node name="GoldenFly9" parent="Food" unique_id=1027169351 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4569)
+
+[node name="GoldenFly10" parent="Food" unique_id=1538499483 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4619)
+
+[node name="GoldenFly11" parent="Food" unique_id=86997865 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4659)
+
+[node name="GoldenFly12" parent="Food" unique_id=302550474 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4769)
+
+[node name="GoldenFly13" parent="Food" unique_id=1438621904 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4719)
+
+[node name="GoldenFly14" parent="Food" unique_id=1808969895 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4816)
+
+[node name="GoldenFly15" parent="Food" unique_id=1504846962 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4866)
+
+[node name="GoldenFly16" parent="Food" unique_id=983193892 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4899)
+
+[node name="GoldenFly17" parent="Food" unique_id=1654916292 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5009)
+
+[node name="GoldenFly18" parent="Food" unique_id=576383742 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4959)
+
+[node name="GoldenFly19" parent="Food" unique_id=36775811 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5056)
+
+[node name="GoldenFly20" parent="Food" unique_id=261913510 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5106)
+
+[node name="GoldenFly21" parent="Food" unique_id=1358300030 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5153)
+
+[node name="GoldenFly22" parent="Food" unique_id=1011029011 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5194)
+
+[node name="GoldenFly23" parent="Food" unique_id=180324591 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5235)
+
+[node name="GoldenFly24" parent="Food" unique_id=123534261 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5281)
+
+[node name="GoldenFly25" parent="Food" unique_id=1084505974 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5313)
+
 [node name="Platforms" type="Node2D" parent="." unique_id=1709310215]
 
 [node name="Platform" parent="Platforms" unique_id=1495141826 instance=ExtResource("8_ceynx")]
@@ -797,78 +877,6 @@ position = Vector2(-77, -3285)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform6" unique_id=800611913]
 libraries/ = SubResource("AnimationLibrary_1scrl")
 autoplay = &"platform 6"
-
-[node name="GoldenFly2" parent="." unique_id=985332079 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4282)
-
-[node name="GoldenFly3" parent="." unique_id=988429656 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4232)
-
-[node name="GoldenFly4" parent="." unique_id=1287159568 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4329)
-
-[node name="GoldenFly5" parent="." unique_id=1124773589 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4379)
-
-[node name="GoldenFly6" parent="." unique_id=1322898161 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4412)
-
-[node name="GoldenFly7" parent="." unique_id=1722224418 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4522)
-
-[node name="GoldenFly8" parent="." unique_id=1880948557 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4472)
-
-[node name="GoldenFly9" parent="." unique_id=1027169351 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4569)
-
-[node name="GoldenFly10" parent="." unique_id=1538499483 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4619)
-
-[node name="GoldenFly11" parent="." unique_id=86997865 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4659)
-
-[node name="GoldenFly12" parent="." unique_id=302550474 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4769)
-
-[node name="GoldenFly13" parent="." unique_id=1438621904 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4719)
-
-[node name="GoldenFly14" parent="." unique_id=1808969895 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4816)
-
-[node name="GoldenFly15" parent="." unique_id=1504846962 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4866)
-
-[node name="GoldenFly16" parent="." unique_id=983193892 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4899)
-
-[node name="GoldenFly17" parent="." unique_id=1654916292 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5009)
-
-[node name="GoldenFly18" parent="." unique_id=576383742 instance=ExtResource("9_0harl")]
-position = Vector2(2, -4959)
-
-[node name="GoldenFly19" parent="." unique_id=36775811 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5056)
-
-[node name="GoldenFly20" parent="." unique_id=261913510 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5106)
-
-[node name="GoldenFly21" parent="." unique_id=1358300030 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5153)
-
-[node name="GoldenFly22" parent="." unique_id=1011029011 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5194)
-
-[node name="GoldenFly23" parent="." unique_id=180324591 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5235)
-
-[node name="GoldenFly24" parent="." unique_id=123534261 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5281)
-
-[node name="GoldenFly25" parent="." unique_id=1084505974 instance=ExtResource("9_0harl")]
-position = Vector2(2, -5313)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=303716008]
 position = Vector2(0, -100)
