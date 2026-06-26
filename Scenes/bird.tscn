@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://drvurn5ajf453"]
+
+[ext_resource type="Script" uid="uid://ckr1i8w6b40cn" path="res://Scripts/bird.gd" id="1_mcegt"]
+[ext_resource type="Texture2D" uid="uid://ni5rsbr7ivrx" path="res://Sprites/Bird.png" id="2_dnvpi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl8r2"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr33m"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf4a6"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfwoh"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_om1ab"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc6qe"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gbwe"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xutp"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8o4c"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61cv0"]
+atlas = ExtResource("2_dnvpi")
+region = Rect2(1728, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o08xy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl8r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr33m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf4a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfwoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_om1ab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc6qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gbwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xutp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8o4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61cv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ktp83"]
+radius = 74.0
+height = 158.0
+
+[node name="Bird" type="CharacterBody2D" unique_id=1814349771 groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("1_mcegt")
+speed = 4000.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537278928]
+position = Vector2(6, 1)
+sprite_frames = SubResource("SpriteFrames_o08xy")
+autoplay = "default"
+frame_progress = 0.19373141
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1892377095]
+target_position = Vector2(190, 0)
+collision_mask = 10
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1056967339 groups=["Enemy"]]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1582613698 groups=["Enemy"]]
+shape = SubResource("CapsuleShape2D_ktp83")

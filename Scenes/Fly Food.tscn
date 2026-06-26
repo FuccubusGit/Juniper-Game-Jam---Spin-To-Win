@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cj8c1sgruih7v"]
 
+[ext_resource type="Script" uid="uid://hvoncicp76qn" path="res://Scripts/fly.gd" id="1_06xii"]
 [ext_resource type="Texture2D" uid="uid://bl6d6gokl6mc1" path="res://Sprites/Fly.png" id="1_slkfb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slkfb"]
@@ -74,20 +75,27 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl1sf"]
-radius = 34.0
+radius = 17.029387
 
-[node name="FlyFood" type="Area2D" unique_id=641732646 groups=["Grapple"]]
+[node name="FlyFood" type="Area2D" unique_id=641732646 groups=["Food"]]
 collision_layer = 4
 gravity = 0.0
+script = ExtResource("1_06xii")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218166018]
 sprite_frames = SubResource("SpriteFrames_fre1k")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.5335513
+frame_progress = 0.65962225
 
-[node name="GrapplePoint" type="Marker2D" parent="." unique_id=1223905276 groups=["Grapple"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1819072303 groups=["Grapple"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1819072303 groups=["Food"]]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_kl1sf")
+
+[node name="Timer" type="Timer" parent="." unique_id=1056388967]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,6 +2,7 @@ extends Node
 
 @onready var animator: AnimatedSprite2D = %Animator
 @onready var move: Node = $"../MovementComponent"
+@onready var energy: ProgressBar = $"../ProgressBar"
 
 enum States {
 	Idle,
@@ -9,10 +10,7 @@ enum States {
 	Jumping,
 	Flying,
 	Falling,
-	Grappling,
-	Super,
-	Dead,
-	Respawning
+	HurtFalling,
 }
 
 @export var initialState: States
@@ -36,6 +34,9 @@ func select_state():
 	
 	
 func update_state():
+	if move.isHurt:
+		if currentState != States.HurtFalling:
+			change_state(States.HurtFalling)
 	match currentState:
 		States.Idle:
 			update_idle()
@@ -50,14 +51,8 @@ func update_state():
 			update_flying()
 		States.Falling:
 			update_falling()
-		States.Grappling:
-			update_grappling()
-		States.Super:
-			update_super()
-		States.Dead:
-			update_dead()
-		States.Respawning:
-			update_respawning()
+		States.HurtFalling:
+			update_hurt_falling()
 				
 				
 func update_idle():
@@ -79,27 +74,32 @@ func update_jumping():
 		change_state(States.Idle)
 	if move.isFlying:
 		change_state(States.Flying)
+	if move.isHurt:
+		change_state(States.HurtFalling)
 func update_flying():
 	animator.play("Flying")
-	if owner.velocity.y > 100:
+	if owner.velocity.y > 100 or !energy.canFly:
 		change_state(States.Falling)
+	if move.isHurt:
+		change_state(States.HurtFalling)
+	if owner.is_on_floor():
+		change_state(States.Idle)
 func update_falling():
 	if animator.animation != "JumpingSide":
 		animator.play("JumpingSide")
-	if move.isFlying:
+	if move.isFlying and energy.canFly:
 		animator.stop()
 		animator.frame = 0
 		change_state(States.Flying)
+	if move.isHurt:
+		change_state(States.HurtFalling)
 	if owner.is_on_floor():
 		change_state(States.Idle)
-func update_grappling():
-	pass
-func update_super():
-	pass
-func update_dead():
-	pass
-func update_respawning():
-	pass
+func update_hurt_falling():
+	if owner.is_on_floor():
+		change_state(States.Idle)
+
+
 
 	
 	

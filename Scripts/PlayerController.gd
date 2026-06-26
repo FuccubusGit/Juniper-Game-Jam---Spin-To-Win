@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var move: Node = $MovementComponent
+@onready var flightBar: ProgressBar = $ProgressBar
 
 func _ready() -> void:
 	InputBus.move_input.connect(on_move_input)
@@ -13,6 +14,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move_and_slide()
 	move.apply_gravity(delta)
+	
+	if move.isHurt:
+		if not is_on_floor():
+			return
+		else:
+			move.isHurt = false
+	
 	move.move_update(delta)
 	move.fly_update(delta)
 	
@@ -38,5 +46,12 @@ func on_fly_input_released():
 func on_grapple_input():
 	pass
 	
+func on_hit_detected(area: Area2D):
+	move.isHurt = true
+	move.hurt_push(area)
 	
-	
+
+func _on_hit_detector_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		print("Hit enemy")
+		on_hit_detected(area)
