@@ -2,6 +2,20 @@
 
 [ext_resource type="Script" uid="uid://hvoncicp76qn" path="res://Scripts/fly.gd" id="1_06xii"]
 [ext_resource type="Texture2D" uid="uid://bl6d6gokl6mc1" path="res://Sprites/Fly.png" id="1_slkfb"]
+[ext_resource type="Shader" uid="uid://ce4g77y7rqvci" path="res://Shaders/Dissolve.tres" id="2_ei7ia"]
+[ext_resource type="Shader" uid="uid://cou5iab50iagj" path="res://Shaders/outline.tres" id="4_4hydy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_06m4p"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4hydy"]
+noise = SubResource("FastNoiseLite_06m4p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4tlb"]
+resource_local_to_scene = true
+shader = ExtResource("2_ei7ia")
+shader_parameter/Noise = SubResource("NoiseTexture2D_4hydy")
+shader_parameter/DissolveValue = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slkfb"]
 atlas = ExtResource("1_slkfb")
@@ -74,8 +88,26 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y88vc"]
+resource_local_to_scene = true
+shader = ExtResource("4_4hydy")
+shader_parameter/OutlineColor = Color(1, 1, 1, 1)
+shader_parameter/Width = 1.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_kl1sf"]
 radius = 17.029387
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ei7ia"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+damping_min = 200.00002
+damping_max = 800.00006
 
 [node name="FlyFood" type="Area2D" unique_id=641732646 groups=["Food"]]
 collision_layer = 4
@@ -83,10 +115,18 @@ gravity = 0.0
 script = ExtResource("1_06xii")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218166018]
+material = SubResource("ShaderMaterial_p4tlb")
 sprite_frames = SubResource("SpriteFrames_fre1k")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.65962225
+frame_progress = 0.26407933
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=1339421252]
+material = SubResource("ShaderMaterial_y88vc")
+sprite_frames = SubResource("SpriteFrames_fre1k")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.37670985
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1819072303 groups=["Food"]]
 position = Vector2(0, -3)
@@ -96,6 +136,15 @@ shape = SubResource("CircleShape2D_kl1sf")
 wait_time = 3.0
 one_shot = true
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1931454584]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.09999999999999999
+process_material = SubResource("ParticleProcessMaterial_ei7ia")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

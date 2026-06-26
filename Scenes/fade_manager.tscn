@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dv1g6l2casp6p"]
+
+[ext_resource type="Script" uid="uid://smwe0nyypjr" path="res://Scripts/Globals/FadeManager.gd" id="1_riicn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prv8s"]
+bg_color = Color(0.2051174, 0.20511746, 0.20511732, 0.5921569)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8y04"]
+bg_color = Color(3.308989e-07, 0.19799796, 0.12789652, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="FadeManager" type="CanvasLayer" unique_id=1361480095]
+script = ExtResource("1_riicn")
+
+[node name="FadeRect" type="ColorRect" parent="." unique_id=294209638]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LoadingBar" type="ProgressBar" parent="." unique_id=2065556772]
+visible = false
+offset_left = 10.0
+offset_top = 232.0
+offset_right = 471.0
+offset_bottom = 255.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_prv8s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w8y04")

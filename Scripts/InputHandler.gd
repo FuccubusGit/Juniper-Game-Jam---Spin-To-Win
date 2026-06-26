@@ -10,8 +10,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		InputBus.jump_input.emit()
 	if Input.is_action_just_released("Jump"):
 		InputBus.jump_input_released.emit()
-	if Input.is_action_just_pressed("Grapple"):
-		InputBus.grapple_input.emit()
 	
 		
 func read_move_input():

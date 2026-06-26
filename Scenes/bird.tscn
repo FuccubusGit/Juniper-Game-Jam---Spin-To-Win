@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ckr1i8w6b40cn" path="res://Scripts/bird.gd" id="1_mcegt"]
 [ext_resource type="Texture2D" uid="uid://ni5rsbr7ivrx" path="res://Sprites/Bird.png" id="2_dnvpi"]
+[ext_resource type="Shader" uid="uid://cou5iab50iagj" path="res://Shaders/outline.tres" id="2_vl8r2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rr33m"]
+resource_local_to_scene = true
+shader = ExtResource("2_vl8r2")
+shader_parameter/OutlineColor = Color(0.61229926, 1.504086e-06, 5.7756904e-07, 1)
+shader_parameter/Width = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vl8r2"]
 atlas = ExtResource("2_dnvpi")
@@ -93,6 +100,7 @@ script = ExtResource("1_mcegt")
 speed = 4000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=537278928]
+material = SubResource("ShaderMaterial_rr33m")
 position = Vector2(6, 1)
 sprite_frames = SubResource("SpriteFrames_o08xy")
 autoplay = "default"

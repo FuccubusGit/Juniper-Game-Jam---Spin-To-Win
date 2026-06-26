@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://drvurn5ajf453" path="res://Scenes/bird.tscn" id="6_qfxak"]
 [ext_resource type="PackedScene" uid="uid://cj8c1sgruih7v" path="res://Scenes/Fly Food.tscn" id="7_t26mr"]
 [ext_resource type="PackedScene" uid="uid://bn36nxnwoga6g" path="res://Scenes/platform.tscn" id="8_ceynx"]
+[ext_resource type="PackedScene" uid="uid://cmal2errcliya" path="res://Scenes/golden_fly.tscn" id="9_0harl"]
+[ext_resource type="Script" uid="uid://bau7v3wb0k0kj" path="res://Scenes/StartCamera.gd" id="10_a5bns"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qfxak"]
 frequency = 0.0075
@@ -492,6 +494,9 @@ polygon = PackedVector2Array(-112, -1379, -111, -1587, -80, -1587, -67, -1379)
 [node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="Collision Shapes" unique_id=951099276]
 polygon = PackedVector2Array(-137, -2122, 79, -2322, 145, -2278, 79, -2241, 79, -2202, 123, -2202, 112, -2117)
 
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="Collision Shapes" unique_id=457733932]
+polygon = PackedVector2Array(-18, -3977, 27, -3977, 27, -3979, -18, -3979)
+
 [node name="Lights" type="Node2D" parent="." unique_id=412865318]
 
 [node name="God Ray" type="PointLight2D" parent="Lights" unique_id=284852409]
@@ -637,7 +642,7 @@ texture = SubResource("GradientTexture2D_gbs7j")
 [node name="Player" parent="." unique_id=1391286059 instance=ExtResource("1_76ciu")]
 light_mask = 7
 z_index = 20
-position = Vector2(-95, -1617)
+position = Vector2(2, -518)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1319135793]
 
@@ -661,7 +666,7 @@ collision_layer = 10
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Spike/Area2D" unique_id=1798076776 groups=["Enemy"]]
 position = Vector2(180, 667)
-polygon = PackedVector2Array(-180, -674, -126, -724, -56, -768, -58, -753, -121, -708, -170, -664)
+polygon = PackedVector2Array(-180, -674, -126, -724, -55, -768, -57, -753, -121, -708, -170, -664)
 
 [node name="Area2D" type="Area2D" parent="Enemies" unique_id=1395997695 groups=["Enemy"]]
 position = Vector2(178, -672)
@@ -711,28 +716,16 @@ scale = Vector2(0.15, 0.15)
 position = Vector2(157, -2926)
 scale = Vector2(0.15, 0.15)
 
-[node name="Bird15" parent="Enemies" unique_id=1353539990 instance=ExtResource("6_qfxak")]
-position = Vector2(-165, -2967)
-scale = Vector2(0.15, 0.15)
-
 [node name="Bird16" parent="Enemies" unique_id=1611492198 instance=ExtResource("6_qfxak")]
 position = Vector2(0, -2991)
 scale = Vector2(0.15, 0.15)
 
-[node name="Bird17" parent="Enemies" unique_id=1459339628 instance=ExtResource("6_qfxak")]
-position = Vector2(-164, -3062)
-scale = Vector2(0.15, 0.15)
-
-[node name="Bird18" parent="Enemies" unique_id=1030215020 instance=ExtResource("6_qfxak")]
-position = Vector2(-99, -3110)
-scale = Vector2(0.15, 0.15)
-
 [node name="Bird19" parent="Enemies" unique_id=31533730 instance=ExtResource("6_qfxak")]
-position = Vector2(158, -3143)
+position = Vector2(161, -3127.0002)
 scale = Vector2(0.15, 0.15)
 
 [node name="Bird20" parent="Enemies" unique_id=713111014 instance=ExtResource("6_qfxak")]
-position = Vector2(64, -3175)
+position = Vector2(-143, -3191)
 scale = Vector2(0.15, 0.15)
 
 [node name="Bird7" parent="Enemies" unique_id=1722971007 instance=ExtResource("6_qfxak")]
@@ -742,16 +735,31 @@ scale = Vector2(0.3, 0.3)
 [node name="Food" type="Node2D" parent="." unique_id=1854736110]
 
 [node name="FlyFood2" parent="Food" unique_id=430316458 instance=ExtResource("7_t26mr")]
-position = Vector2(27, -1897)
+position = Vector2(-1, -1908)
 
-[node name="FlyFood4" parent="Food" unique_id=1873718976 instance=ExtResource("7_t26mr")]
-position = Vector2(147, -2096)
+[node name="FlyFood6" parent="Food" unique_id=641732646 instance=ExtResource("7_t26mr")]
+position = Vector2(145, -2103)
+
+[node name="FlyFood3" parent="Food" unique_id=1830950077 instance=ExtResource("7_t26mr")]
+position = Vector2(154, -1631)
 
 [node name="FlyFood5" parent="Food" unique_id=782589541 instance=ExtResource("7_t26mr")]
 position = Vector2(0, -2359)
 
-[node name="FlyFood6" parent="Food" unique_id=641732646 instance=ExtResource("7_t26mr")]
-position = Vector2(96, -2507)
+[node name="FlyFood7" parent="Food" unique_id=498623597 instance=ExtResource("7_t26mr")]
+position = Vector2(1, -3041)
+
+[node name="FlyFood8" parent="Food" unique_id=1492005853 instance=ExtResource("7_t26mr")]
+position = Vector2(1, -3144)
+
+[node name="FlyFood9" parent="Food" unique_id=1008481026 instance=ExtResource("7_t26mr")]
+position = Vector2(75, -3628)
+
+[node name="FlyFood10" parent="Food" unique_id=1107010808 instance=ExtResource("7_t26mr")]
+position = Vector2(-56, -3773)
+
+[node name="FlyFood11" parent="Food" unique_id=665782842 instance=ExtResource("7_t26mr")]
+position = Vector2(73, -3908)
 
 [node name="Platforms" type="Node2D" parent="." unique_id=1709310215]
 
@@ -776,9 +784,6 @@ position = Vector2(-170, -2829)
 libraries/ = SubResource("AnimationLibrary_18cfy")
 autoplay = &"platform3"
 
-[node name="Platform4" parent="Platforms" unique_id=1217908715 instance=ExtResource("8_ceynx")]
-position = Vector2(-74, -3019)
-
 [node name="Platform5" parent="Platforms" unique_id=170689182 instance=ExtResource("8_ceynx")]
 position = Vector2(77, -3285)
 
@@ -792,3 +797,86 @@ position = Vector2(-77, -3285)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform6" unique_id=800611913]
 libraries/ = SubResource("AnimationLibrary_1scrl")
 autoplay = &"platform 6"
+
+[node name="GoldenFly2" parent="." unique_id=985332079 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4282)
+
+[node name="GoldenFly3" parent="." unique_id=988429656 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4232)
+
+[node name="GoldenFly4" parent="." unique_id=1287159568 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4329)
+
+[node name="GoldenFly5" parent="." unique_id=1124773589 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4379)
+
+[node name="GoldenFly6" parent="." unique_id=1322898161 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4412)
+
+[node name="GoldenFly7" parent="." unique_id=1722224418 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4522)
+
+[node name="GoldenFly8" parent="." unique_id=1880948557 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4472)
+
+[node name="GoldenFly9" parent="." unique_id=1027169351 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4569)
+
+[node name="GoldenFly10" parent="." unique_id=1538499483 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4619)
+
+[node name="GoldenFly11" parent="." unique_id=86997865 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4659)
+
+[node name="GoldenFly12" parent="." unique_id=302550474 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4769)
+
+[node name="GoldenFly13" parent="." unique_id=1438621904 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4719)
+
+[node name="GoldenFly14" parent="." unique_id=1808969895 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4816)
+
+[node name="GoldenFly15" parent="." unique_id=1504846962 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4866)
+
+[node name="GoldenFly16" parent="." unique_id=983193892 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4899)
+
+[node name="GoldenFly17" parent="." unique_id=1654916292 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5009)
+
+[node name="GoldenFly18" parent="." unique_id=576383742 instance=ExtResource("9_0harl")]
+position = Vector2(2, -4959)
+
+[node name="GoldenFly19" parent="." unique_id=36775811 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5056)
+
+[node name="GoldenFly20" parent="." unique_id=261913510 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5106)
+
+[node name="GoldenFly21" parent="." unique_id=1358300030 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5153)
+
+[node name="GoldenFly22" parent="." unique_id=1011029011 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5194)
+
+[node name="GoldenFly23" parent="." unique_id=180324591 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5235)
+
+[node name="GoldenFly24" parent="." unique_id=123534261 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5281)
+
+[node name="GoldenFly25" parent="." unique_id=1084505974 instance=ExtResource("9_0harl")]
+position = Vector2(2, -5313)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=303716008]
+position = Vector2(0, -100)
+process_callback = 0
+limit_left = -240
+limit_top = -5355
+limit_right = 240
+limit_bottom = 36
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+script = ExtResource("10_a5bns")

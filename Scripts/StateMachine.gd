@@ -3,6 +3,8 @@ extends Node
 @onready var animator: AnimatedSprite2D = %Animator
 @onready var move: Node = $"../MovementComponent"
 @onready var energy: ProgressBar = $"../ProgressBar"
+@onready var ray: RayCast2D = $"../HardFallDetector"
+
 
 enum States {
 	Idle,
@@ -11,6 +13,7 @@ enum States {
 	Flying,
 	Falling,
 	HurtFalling,
+	HardLanding,
 }
 
 @export var initialState: States
@@ -21,7 +24,6 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	update_state()
-
 func change_state(newState):
 	if currentState == newState:
 		return
@@ -53,6 +55,8 @@ func update_state():
 			update_falling()
 		States.HurtFalling:
 			update_hurt_falling()
+		States.HardLanding:
+			update_hard_landing()
 				
 				
 func update_idle():
@@ -74,6 +78,8 @@ func update_jumping():
 		change_state(States.Idle)
 	if move.isFlying:
 		change_state(States.Flying)
+	if owner.velocity.y > 100 or !energy.canFly:
+		change_state(States.Falling)
 	if move.isHurt:
 		change_state(States.HurtFalling)
 func update_flying():
@@ -95,9 +101,27 @@ func update_falling():
 		change_state(States.HurtFalling)
 	if owner.is_on_floor():
 		change_state(States.Idle)
+	if move.isHardLanding and ray.is_colliding():
+		change_state(States.HardLanding)
 func update_hurt_falling():
-	if owner.is_on_floor():
+	if animator.animation != "Falling":
+		animator.play("Falling")
+	if move.isHardLanding and ray.is_colliding():
+		change_state(States.HardLanding)
+	if owner.is_on_floor() and not move.isHardLanding:
+		change_state(States.HardLanding)
+func update_hard_landing():
+	if move.isHardLanding:
+		animator.play("HardFall")
+	else:
+		animator.play("HardFallRecovery")
+		await animator.animation_finished
 		change_state(States.Idle)
+		
+		
+		
+	
+	
 
 
 

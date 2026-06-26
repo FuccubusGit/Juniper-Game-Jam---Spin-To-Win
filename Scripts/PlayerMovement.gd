@@ -2,6 +2,7 @@ extends Node
 
 @onready var animator: AnimatedSprite2D = %Animator
 @onready var energy: ProgressBar = $"../ProgressBar"
+@onready var jump_particles: GPUParticles2D = $"../Jump Particles"
 
 
 @export var groundSpeed: float
@@ -20,11 +21,36 @@ var isCharging: bool = false
 var jumpChargeTime = 0
 var isFlying: bool = false
 var isHurt: bool = false
+var isTweenRunning: bool = false
+var isHardLanding: bool = false
+var canInput: bool = true
+
+var fallTimer: float = 0
 
 func _process(delta: float) -> void:
-	if isCharging:
+	if owner.velocity.y > 300:
+		fallTimer += delta
+	if fallTimer > 0.3:
+		isHardLanding = true
+		if owner.is_on_floor() and isHardLanding:
+			await get_tree().create_timer(1.0).timeout
+			isHardLanding = false
+			fallTimer = 0.0
+			canInput = false
+	if not canInput:
+		await get_tree().create_timer(0.6).timeout
+		canInput = true
+	if isCharging and canInput:
 		jumpChargeTime += delta
 		jumpChargeTime = clampf(jumpChargeTime, 0.0, maxJumpChargeTime)
+	if jumpChargeTime == maxJumpChargeTime and not isTweenRunning:
+		isTweenRunning = true
+		animator.material.set_shader_parameter("blink_color", Color.WHITE)
+		var tween = get_tree().create_tween()
+		tween.tween_method(owner.SetShader_BlinkIntensity, 1.0, 0.0, 0.5)
+		await tween.finished
+		isTweenRunning = false
+		
 func set_direction(direction: float):
 	moveDirection = direction
 	
@@ -38,10 +64,14 @@ func move_update(delta):
 		animator.flip_h = moveDirection < 0
 	
 func start_jump_charge():
-	isCharging = true
+	if canInput:
+		isCharging = true
 	
 func jump():
 	if owner.is_on_floor():
+		if jumpChargeTime == maxJumpChargeTime:
+			jump_particles.restart()
+			jump_particles.emitting = true
 		owner.velocity.y += -jumpForce * jumpChargeTime
 		jumpChargeTime = 0
 	isCharging = false
@@ -53,6 +83,7 @@ func set_flying(boolean: bool):
 	if owner.velocity.y > 50 or isFlying:
 		isFlying = boolean
 		
+		
 func fly_update(delta):
 	if !isFlying or owner.is_on_floor() or isHurt or !energy.canFly:
 		return
@@ -60,6 +91,8 @@ func fly_update(delta):
 	var acceleration = liftSpeed * delta
 	owner.velocity.y = move_toward(owner.velocity.y, -maxLiftSpeed, acceleration)
 	owner.velocity.y += downBias * delta
+	
+	
 	
 func hurt_push(area):
 	var delta = get_physics_process_delta_time()

@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://cmal2errcliya"]
+
+[ext_resource type="Script" uid="uid://hvoncicp76qn" path="res://Scripts/fly.gd" id="1_3xb3x"]
+[ext_resource type="Shader" uid="uid://ce4g77y7rqvci" path="res://Shaders/Dissolve.tres" id="1_aqtbc"]
+[ext_resource type="Texture2D" uid="uid://bpfamjqqte6b" path="res://Sprites/Golden_Fly.png" id="2_aqtbc"]
+[ext_resource type="Shader" uid="uid://cou5iab50iagj" path="res://Shaders/outline.tres" id="4_n4ndt"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_06m4p"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4hydy"]
+noise = SubResource("FastNoiseLite_06m4p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4tlb"]
+resource_local_to_scene = true
+shader = ExtResource("1_aqtbc")
+shader_parameter/Noise = SubResource("NoiseTexture2D_4hydy")
+shader_parameter/DissolveValue = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xb3x"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4ndt"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqq3b"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0sox"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwhai"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkqeo"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wfcf"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vut0n"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk12a"]
+atlas = ExtResource("2_aqtbc")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4ndt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xb3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4ndt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqq3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0sox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwhai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkqeo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wfcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vut0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk12a")
+}],
+"loop": true,
+"name": &"Golden_Idle",
+"speed": 10.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqq3b"]
+resource_local_to_scene = true
+shader = ExtResource("4_n4ndt")
+shader_parameter/OutlineColor = Color(0.91764706, 0.6313726, 0.21960784, 1)
+shader_parameter/Width = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqq3b"]
+radius = 17.029387
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w0sox"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+damping_min = 200.00002
+damping_max = 800.00006
+
+[sub_resource type="Gradient" id="Gradient_crguq"]
+colors = PackedColorArray(1, 1, 1, 1, 0.04294479, 0.04294479, 0.04294479, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2iiv1"]
+gradient = SubResource("Gradient_crguq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+
+[sub_resource type="Animation" id="Animation_aqtbc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3xb3x"]
+resource_name = "goldenFly"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4ndt"]
+_data = {
+&"RESET": SubResource("Animation_aqtbc"),
+&"goldenFly": SubResource("Animation_3xb3x")
+}
+
+[node name="GoldenFly" type="Area2D" unique_id=601875234 groups=["Golden Food"]]
+collision_layer = 4
+script = ExtResource("1_3xb3x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=732926749 groups=["Golden Food"]]
+material = SubResource("ShaderMaterial_p4tlb")
+sprite_frames = SubResource("SpriteFrames_n4ndt")
+animation = &"Golden_Idle"
+autoplay = "Golden_Idle"
+frame_progress = 0.4814161
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=673166896 groups=["Golden Food"]]
+material = SubResource("ShaderMaterial_xqq3b")
+sprite_frames = SubResource("SpriteFrames_n4ndt")
+animation = &"Golden_Idle"
+autoplay = "Golden_Idle"
+frame_progress = 0.57666
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=132104849 groups=["Golden Food"]]
+visible = false
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_xqq3b")
+
+[node name="Timer" type="Timer" parent="." unique_id=1130221088]
+wait_time = 3.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=676076421]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.09999999999999999
+process_material = SubResource("ParticleProcessMaterial_w0sox")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=929552271]
+color = Color(0.9129678, 0.8988933, 0, 1)
+range_item_cull_mask = 6
+texture = SubResource("GradientTexture2D_2iiv1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D" unique_id=1942206769]
+libraries/ = SubResource("AnimationLibrary_n4ndt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
