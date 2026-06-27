@@ -14,6 +14,10 @@
 [ext_resource type="Script" uid="uid://balsp47ygve0n" path="res://Scripts/StateMachine.gd" id="6_nn08x"]
 [ext_resource type="Script" uid="uid://ceibofhdun5hs" path="res://Scenes/flightBar.gd" id="10_yoq75"]
 [ext_resource type="Script" uid="uid://bkqahfisylvk0" path="res://Scripts/jump_charge_bar.gd" id="12_glx4g"]
+[ext_resource type="AudioStream" uid="uid://bghl2b0o6yo7q" path="res://Audio/Jump_Sound.mp3" id="15_1e7my"]
+[ext_resource type="AudioStream" uid="uid://do05kx45c5yll" path="res://Audio/Hit.wav" id="16_arntx"]
+[ext_resource type="AudioStream" uid="uid://d4exnj6nesqx5" path="res://Audio/powerup.wav" id="17_lslt6"]
+[ext_resource type="AudioStream" uid="uid://dlgbwtyew2ggq" path="res://Audio/232135__yottasounds__splat-005.wav" id="18_ulo2v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yoq75"]
 resource_local_to_scene = true
@@ -602,7 +606,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"JumpReady",
-"speed": 10.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -729,6 +733,7 @@ corner_radius_top_right = 5
 collision_mask = 14
 slide_on_ceiling = false
 floor_stop_on_slope = false
+floor_constant_speed = true
 floor_max_angle = 0.09250245
 script = ExtResource("1_dewec")
 
@@ -736,9 +741,7 @@ script = ExtResource("1_dewec")
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_yoq75")
 sprite_frames = SubResource("SpriteFrames_gntrk")
-animation = &"JumpingSide"
-frame = 4
-frame_progress = 1.0
+animation = &"JumpReady"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1421310535 groups=["Player"]]
 position = Vector2(-1, 3)
@@ -793,7 +796,6 @@ offset_right = 8.0
 offset_bottom = 24.0
 theme_override_styles/background = SubResource("StyleBoxFlat_megsn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yoq75")
-step = 0.1
 value = 100.0
 show_percentage = false
 script = ExtResource("10_yoq75")
@@ -835,6 +837,23 @@ max_value = 1.0
 fill_mode = 3
 show_percentage = false
 script = ExtResource("12_glx4g")
+
+[node name="Audio" type="Node2D" parent="." unique_id=192684196]
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="Audio" unique_id=72763133]
+stream = ExtResource("15_1e7my")
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Audio" unique_id=169567566]
+stream = ExtResource("16_arntx")
+bus = &"SFX"
+
+[node name="PowerUpSound" type="AudioStreamPlayer2D" parent="Audio" unique_id=1034391678]
+stream = ExtResource("17_lslt6")
+bus = &"SFX"
+
+[node name="SplatSound" type="AudioStreamPlayer2D" parent="Audio" unique_id=847417733]
+stream = ExtResource("18_ulo2v")
 
 [connection signal="area_entered" from="Hit detector" to="." method="_on_hit_detector_area_entered"]
 [connection signal="area_entered" from="Hit detector" to="ProgressBar" method="_on_hit_detector_area_entered"]

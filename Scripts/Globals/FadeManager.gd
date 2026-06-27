@@ -4,13 +4,14 @@ extends CanvasLayer
 @onready var loading_bar: ProgressBar = $LoadingBar
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	layer = 100
 	fade_rect.color = Color.BLACK
 	fade_rect.color.a = 0.0
 	loading_bar.visible = false
 
 
-func transition_to(scene_path: String, fade_duration: float = 0.4) -> void:
+func transition_to(scene_path: String, new_music: AudioStream = null, fade_duration: float = 0.4) -> void:
 	await fade_out(fade_duration)
 	
 	loading_bar.visible = true
@@ -39,7 +40,10 @@ func transition_to(scene_path: String, fade_duration: float = 0.4) -> void:
 	get_tree().change_scene_to_packed(new_scene)
 	
 	loading_bar.visible = false
+	if new_music:
+		MusicManager.transition_music(new_music, 1.0)
 	await fade_in(fade_duration)
+	
 
 
 func fade_out(duration: float = 0.4) -> void:

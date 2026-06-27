@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b61xd6ek60rpn"]
+
+[ext_resource type="Script" uid="uid://2akcdso5xkow" path="res://final_scene.gd" id="1_ay78q"]
+[ext_resource type="Texture2D" uid="uid://chv0edg1srufg" path="res://Sprites/Final Scene.png" id="2_fi7pp"]
+
+[node name="FinalScene" type="CanvasLayer" unique_id=1397987845]
+script = ExtResource("1_ay78q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1989869731]
+position = Vector2(240, 135)
+texture = ExtResource("2_fi7pp")
+
+[node name="Button" type="Button" parent="." unique_id=969985817]
+offset_left = 2.0
+offset_top = 237.0
+offset_right = 98.0
+offset_bottom = 268.0
+text = "Main Menu"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

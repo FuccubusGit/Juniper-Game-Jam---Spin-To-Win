@@ -2,16 +2,24 @@
 
 [ext_resource type="Shader" uid="uid://xvewsr4hrcym" path="res://Scenes/Fog.gdshader" id="1_1pj3s"]
 [ext_resource type="PackedScene" uid="uid://bpf2empbdd5m6" path="res://Scenes/Player.tscn" id="1_76ciu"]
+[ext_resource type="Script" uid="uid://dgr64321fvc3l" path="res://Scenes/LevelManager.gd" id="1_ivofh"]
 [ext_resource type="Texture2D" uid="uid://dfymbjt05754x" path="res://Sprites/Tower.png" id="1_omj1r"]
 [ext_resource type="Shader" uid="uid://66xftih27d17" path="res://Shaders/Tower.gdshader" id="2_tolab"]
 [ext_resource type="Script" uid="uid://dsc5hqxbda74i" path="res://Scripts/tower.gd" id="3_3lbbe"]
 [ext_resource type="Texture2D" uid="uid://b33w33hj65e1s" path="res://Sprites/lampada fiamma.png" id="3_yfk4l"]
+[ext_resource type="Script" uid="uid://kqcxd16hx3vg" path="res://Scenes/pause_menu.gd" id="4_lxto7"]
 [ext_resource type="Texture2D" uid="uid://dlf3tia4aesrq" path="res://Sprites/torcia.png" id="4_mbfsj"]
+[ext_resource type="Texture2D" uid="uid://ddjrfrk8dsvg3" path="res://Sprites/PauseMenuBorder.png" id="5_gbs7j"]
 [ext_resource type="PackedScene" uid="uid://drvurn5ajf453" path="res://Scenes/bird.tscn" id="6_qfxak"]
+[ext_resource type="Texture2D" uid="uid://dfqqk0u3d1opx" path="res://Sprites/CloseMenu.png" id="6_w56qm"]
+[ext_resource type="PackedScene" uid="uid://dg50l3uofr3vb" path="res://Scenes/hat.tscn" id="7_gbs7j"]
 [ext_resource type="PackedScene" uid="uid://cj8c1sgruih7v" path="res://Scenes/Fly Food.tscn" id="7_t26mr"]
 [ext_resource type="PackedScene" uid="uid://bn36nxnwoga6g" path="res://Scenes/platform.tscn" id="8_ceynx"]
 [ext_resource type="PackedScene" uid="uid://cmal2errcliya" path="res://Scenes/golden_fly.tscn" id="9_0harl"]
 [ext_resource type="Script" uid="uid://bau7v3wb0k0kj" path="res://Scenes/StartCamera.gd" id="10_a5bns"]
+[ext_resource type="Script" uid="uid://jl34x3w4hm81" path="res://Scenes/button.gd" id="14_3vire"]
+[ext_resource type="Script" uid="uid://cdvrkls2htfxl" path="res://Scenes/win_area.gd" id="19_w56qm"]
+[ext_resource type="Script" uid="uid://j2gylf8n7rci" path="res://Scenes/death_area.gd" id="20_ynbq5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qfxak"]
 frequency = 0.0075
@@ -28,6 +36,27 @@ shader = ExtResource("1_1pj3s")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_t26mr")
 shader_parameter/density = 0.25
 shader_parameter/speed = Vector2(0.02, 0.01)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynbq5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1scrl"]
+bg_color = Color(0.9647059, 0.87058824, 0.93333334, 0.67058825)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1525"]
+bg_color = Color(0.9647059, 0.87058824, 0.93333334, 0.40784314)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tolab"]
 shader = ExtResource("2_tolab")
@@ -411,7 +440,14 @@ _data = {
 &"platform 6": SubResource("Animation_ynbq5")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynbq5"]
+size = Vector2(274, 161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1scrl"]
+size = Vector2(488, 104)
+
 [node name="Test Level" type="Node2D" unique_id=2051759611]
+script = ExtResource("1_ivofh")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1553832703]
 light_mask = 5
@@ -439,6 +475,55 @@ offset_right = 480.0
 offset_bottom = 270.0
 color = Color(1, 0.83137256, 0.7647059, 0.4862745)
 metadata/_edit_use_anchors_ = true
+
+[node name="DebugWinButton" type="Button" parent="ParallaxBackground" unique_id=1391178385]
+visible = false
+offset_left = 7.0
+offset_top = 233.0
+offset_right = 115.0
+offset_bottom = 264.0
+text = "To win scene"
+script = ExtResource("14_3vire")
+
+[node name="PauseMenu" type="Control" parent="ParallaxBackground" unique_id=534905522]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_lxto7")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/PauseMenu" unique_id=958005901]
+position = Vector2(240, 135)
+texture = ExtResource("5_gbs7j")
+
+[node name="CloseMenu" type="Button" parent="ParallaxBackground/PauseMenu" unique_id=354926456]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 70.0
+offset_right = 357.0
+offset_bottom = 94.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ynbq5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1scrl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a1525")
+icon = ExtResource("6_w56qm")
+icon_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="ParallaxBackground/PauseMenu" unique_id=605877433]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 90.0
+offset_right = 287.0
+offset_bottom = 121.0
+text = "Continue"
+
+[node name="Main MenuButton" type="Button" parent="ParallaxBackground/PauseMenu" unique_id=1990996369]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 142.0
+offset_right = 291.0
+offset_bottom = 173.0
+text = "Main Menu"
 
 [node name="Collision Shapes" type="StaticBody2D" parent="." unique_id=755924614]
 light_mask = 2
@@ -650,7 +735,7 @@ texture = SubResource("GradientTexture2D_gbs7j")
 [node name="Player" parent="." unique_id=1391286059 instance=ExtResource("1_76ciu")]
 light_mask = 7
 z_index = 20
-position = Vector2(2, -518)
+position = Vector2(8, -793)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1319135793]
 
@@ -743,13 +828,10 @@ scale = Vector2(0.3, 0.3)
 [node name="Food" type="Node2D" parent="." unique_id=1854736110]
 
 [node name="FlyFood2" parent="Food" unique_id=430316458 instance=ExtResource("7_t26mr")]
-position = Vector2(-1, -1908)
+position = Vector2(-1, -1880)
 
 [node name="FlyFood6" parent="Food" unique_id=641732646 instance=ExtResource("7_t26mr")]
-position = Vector2(145, -2103)
-
-[node name="FlyFood3" parent="Food" unique_id=1830950077 instance=ExtResource("7_t26mr")]
-position = Vector2(154, -1631)
+position = Vector2(135, -2076)
 
 [node name="FlyFood5" parent="Food" unique_id=782589541 instance=ExtResource("7_t26mr")]
 position = Vector2(0, -2359)
@@ -888,3 +970,28 @@ limit_bottom = 36
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("10_a5bns")
+
+[node name="Hat" parent="." unique_id=1672151644 instance=ExtResource("7_gbs7j")]
+position = Vector2(1, -3999)
+
+[node name="Win Area" type="Area2D" parent="." unique_id=1766871898]
+position = Vector2(1, -5392)
+script = ExtResource("19_w56qm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Win Area" unique_id=41884779]
+position = Vector2(1, -65.5)
+shape = SubResource("RectangleShape2D_ynbq5")
+
+[node name="Death Area" type="Area2D" parent="." unique_id=1505695795]
+script = ExtResource("20_ynbq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Area" unique_id=826964184]
+position = Vector2(9, 93)
+shape = SubResource("RectangleShape2D_1scrl")
+
+[connection signal="button_up" from="ParallaxBackground/DebugWinButton" to="ParallaxBackground/DebugWinButton" method="_on_button_up"]
+[connection signal="button_up" from="ParallaxBackground/PauseMenu/CloseMenu" to="ParallaxBackground/PauseMenu" method="_on_close_menu_button_up"]
+[connection signal="button_up" from="ParallaxBackground/PauseMenu/ContinueButton" to="ParallaxBackground/PauseMenu" method="_on_continue_button_button_up"]
+[connection signal="button_up" from="ParallaxBackground/PauseMenu/Main MenuButton" to="ParallaxBackground/PauseMenu" method="_on_main_menu_button_button_up"]
+[connection signal="body_entered" from="Win Area" to="Win Area" method="_on_body_entered"]
+[connection signal="body_entered" from="Death Area" to="Death Area" method="_on_body_entered"]

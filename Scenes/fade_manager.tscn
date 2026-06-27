@@ -17,6 +17,7 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [node name="FadeManager" type="CanvasLayer" unique_id=1361480095]
+process_mode = 3
 script = ExtResource("1_riicn")
 
 [node name="FadeRect" type="ColorRect" parent="." unique_id=294209638]

@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://blc0v0l8evxht" path="res://Sprites/MainMenu.png" id="1_28flt"]
 [ext_resource type="Texture2D" uid="uid://dm70b1v1mprmw" path="res://Sprites/MainMenuTitle.png" id="2_48xlc"]
 [ext_resource type="Texture2D" uid="uid://fkk8l7cse6iv" path="res://Sprites/Gear.png" id="4_ce3w2"]
+[ext_resource type="Script" uid="uid://cml2h300w5pj3" path="res://Scripts/Options.gd" id="5_opfnp"]
+[ext_resource type="Texture2D" uid="uid://cs5rgop1kgvi" path="res://Sprites/OptionMenu.png" id="6_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://dfqqk0u3d1opx" path="res://Sprites/CloseMenu.png" id="7_cp0ys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48xlc"]
 atlas = ExtResource("1_28flt")
@@ -358,6 +361,27 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trj04"]
+bg_color = Color(0.9647059, 0.87058824, 0.93333334, 0.67058825)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16hvj"]
+bg_color = Color(0.9647059, 0.87058824, 0.93333334, 0.40784314)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [node name="Main Menu" type="CanvasLayer" unique_id=27589789]
 script = ExtResource("1_1ehe0")
 
@@ -417,7 +441,62 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_opfnp")
 icon = ExtResource("4_ce3w2")
 icon_alignment = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1411193990]
+[node name="Options Menu" type="Control" parent="." unique_id=1932822837]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_opfnp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Options Menu" unique_id=2084449458]
+position = Vector2(240, 135)
+texture = ExtResource("6_cp0ys")
+
+[node name="Master" type="HSlider" parent="Options Menu" unique_id=1822350354]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 96.0
+offset_right = 346.0
+offset_bottom = 112.0
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="Music" type="HSlider" parent="Options Menu" unique_id=2010527324]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 133.0
+offset_right = 347.0
+offset_bottom = 149.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFX" type="HSlider" parent="Options Menu" unique_id=572133516]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 171.0
+offset_right = 347.0
+offset_bottom = 187.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="CloseMenu" type="Button" parent="Options Menu" unique_id=2114165070]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 70.0
+offset_right = 357.0
+offset_bottom = 94.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_yhxw7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_trj04")
+theme_override_styles/hover = SubResource("StyleBoxFlat_16hvj")
+icon = ExtResource("7_cp0ys")
+icon_alignment = 1
 
 [connection signal="button_up" from="PlayButton" to="." method="_on_play_button_button_up"]
 [connection signal="button_up" from="ExitButton" to="." method="_on_exit_button_button_up"]
+[connection signal="button_up" from="OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="value_changed" from="Options Menu/Master" to="Options Menu" method="_on_master_value_changed"]
+[connection signal="value_changed" from="Options Menu/Music" to="Options Menu" method="_on_music_value_changed"]
+[connection signal="value_changed" from="Options Menu/SFX" to="Options Menu" method="_on_sfx_value_changed"]
+[connection signal="button_up" from="Options Menu/CloseMenu" to="Options Menu" method="_on_close_menu_button_up"]

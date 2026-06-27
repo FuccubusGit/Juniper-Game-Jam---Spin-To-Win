@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var animator: AnimatedSprite2D = %Animator
 @onready var camera: Camera2D = $Camera2D
 @onready var hurt_particles: GPUParticles2D = $"Hurt Particles"
+@onready var hit_sound: AudioStreamPlayer2D = $Audio/HitSound
+@onready var power_up: AudioStreamPlayer2D = $Audio/PowerUpSound
 
 
 
@@ -79,6 +81,8 @@ func on_hit_detected(area: Area2D):
 	move.isHurt = true
 	move.hurt_push(area)
 	
+	hit_sound.play()
+	
 	animator.material.set_shader_parameter("blink_color", Color.RED)
 	var tween = get_tree().create_tween()
 	tween.tween_method(SetShader_BlinkIntensity, 1.0, 0.0, 0.5)
@@ -102,12 +106,14 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 		print("Hit enemy")
 		on_hit_detected(area)
 	if area.is_in_group("Golden Food"):
+		power_up.play()
 		animator.material.set_shader_parameter("blink_color", Color.GOLD)
 		var tween = get_tree().create_tween()
 		tween.tween_method(SetShader_BlinkIntensity, 1.0, 0.0, 0.5)
 		var camera_tween = get_tree().create_tween()
 		camera_tween.tween_method(StartCameraShake, 5.0, 1.0, 0.5)
 	if area.is_in_group("Food"):
+		power_up.play()
 		animator.material.set_shader_parameter("blink_color", Color.WHITE)
 		var tween = get_tree().create_tween()
 		tween.tween_method(SetShader_BlinkIntensity, 1.0, 0.0, 0.5)

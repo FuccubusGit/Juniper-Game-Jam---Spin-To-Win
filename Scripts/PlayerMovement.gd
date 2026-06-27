@@ -33,10 +33,7 @@ func _process(delta: float) -> void:
 	if fallTimer > 0.3:
 		isHardLanding = true
 		if owner.is_on_floor() and isHardLanding:
-			await get_tree().create_timer(1.0).timeout
-			isHardLanding = false
-			fallTimer = 0.0
-			canInput = false
+			hard_landing_downed()
 	if not canInput:
 		await get_tree().create_timer(0.6).timeout
 		canInput = true
@@ -44,13 +41,22 @@ func _process(delta: float) -> void:
 		jumpChargeTime += delta
 		jumpChargeTime = clampf(jumpChargeTime, 0.0, maxJumpChargeTime)
 	if jumpChargeTime == maxJumpChargeTime and not isTweenRunning:
-		isTweenRunning = true
-		animator.material.set_shader_parameter("blink_color", Color.WHITE)
-		var tween = get_tree().create_tween()
-		tween.tween_method(owner.SetShader_BlinkIntensity, 1.0, 0.0, 0.5)
-		await tween.finished
-		isTweenRunning = false
+		jump_shader_tween()
 		
+func hard_landing_downed():
+	await get_tree().create_timer(1.0).timeout
+	isHardLanding = false
+	fallTimer = 0.0
+	canInput = false
+		
+func jump_shader_tween():
+	isTweenRunning = true
+	animator.material.set_shader_parameter("blink_color", Color.WHITE)
+	var tween = get_tree().create_tween()
+	tween.tween_method(owner.SetShader_BlinkIntensity, 1.0, 0.0, 0.5)
+	await tween.finished
+	isTweenRunning = false
+	
 func set_direction(direction: float):
 	moveDirection = direction
 	
@@ -64,7 +70,7 @@ func move_update(delta):
 		animator.flip_h = moveDirection < 0
 	
 func start_jump_charge():
-	if canInput:
+	if canInput and owner.is_on_floor():
 		isCharging = true
 	
 func jump():
@@ -80,7 +86,7 @@ func jump():
 func set_flying(boolean: bool):
 	if isHurt or !energy.canFly:
 		return
-	if owner.velocity.y > 50 or isFlying:
+	if owner.velocity.y > 0 or isFlying:
 		isFlying = boolean
 		
 		

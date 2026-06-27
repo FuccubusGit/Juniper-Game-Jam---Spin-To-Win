@@ -4,6 +4,11 @@ extends Node
 @onready var move: Node = $"../MovementComponent"
 @onready var energy: ProgressBar = $"../ProgressBar"
 @onready var ray: RayCast2D = $"../HardFallDetector"
+@onready var jumpAudio: AudioStreamPlayer2D = $"../Audio/JumpSound"
+@onready var hit_sound: AudioStreamPlayer2D = $"../Audio/HitSound"
+@onready var splat_sound: AudioStreamPlayer2D = $"../Audio/SplatSound"
+
+
 
 
 enum States {
@@ -19,16 +24,20 @@ enum States {
 @export var initialState: States
 var currentState: States
 
+var audioPlayed: bool = false
+
 func _ready() -> void:
 	change_state(initialState)
 	
 func _process(delta: float) -> void:
 	update_state()
+	
 func change_state(newState):
 	if currentState == newState:
 		return
 		
 	currentState = newState	
+	audioPlayed = false
 	
 func select_state():
 	if move.moveDirection <= 0.1:
@@ -74,6 +83,9 @@ func update_jumpReady():
 func update_jumping():
 	if animator.animation != "JumpingSide":
 		animator.play("JumpingSide")
+	if not audioPlayed:
+		audioPlayed = true
+		jumpAudio.play()
 	if owner.is_on_floor():
 		change_state(States.Idle)
 	if move.isFlying:
@@ -112,6 +124,9 @@ func update_hurt_falling():
 		change_state(States.HardLanding)
 func update_hard_landing():
 	if move.isHardLanding:
+		if not audioPlayed:
+			audioPlayed = true
+			splat_sound.play()
 		animator.play("HardFall")
 	else:
 		animator.play("HardFallRecovery")
