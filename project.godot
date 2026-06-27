@@ -35,12 +35,14 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=480
 window/size/viewport_height=270
+window/size/mode=4
 window/size/always_on_top=true
+window/size/extend_to_title=true
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
-window/vsync/vsync_mode=0
+window/vsync/vsync_mode=2
 
 [global_group]
 
@@ -49,6 +51,12 @@ Grapple=""
 Enemy=""
 Food=""
 "Golden Food"=""
+
+[gui]
+
+theme/default_font_hinting=2
+theme/default_font_multichannel_signed_distance_field=true
+theme/lcd_subpixel_layout=0
 
 [input]
 

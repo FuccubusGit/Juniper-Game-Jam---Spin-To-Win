@@ -21,6 +21,7 @@ func _on_options_button_button_up() -> void:
 func prewarm_shaders():
 	var dummy = Sprite2D.new()
 	add_child(dummy)
+	dummy.global_position = Vector2.ZERO
 	
 	dummy.material = preload("res://Shaders/Outline.gdshader")
 	dummy.material = preload("res://Shaders/Dissolve.tres")

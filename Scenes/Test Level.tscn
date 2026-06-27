@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bpf2empbdd5m6" path="res://Scenes/Player.tscn" id="1_76ciu"]
 [ext_resource type="Script" uid="uid://dgr64321fvc3l" path="res://Scenes/LevelManager.gd" id="1_ivofh"]
 [ext_resource type="Texture2D" uid="uid://dfymbjt05754x" path="res://Sprites/Tower.png" id="1_omj1r"]
+[ext_resource type="Texture2D" uid="uid://btsj5gfo3cvix" path="res://Sprites/Jump Tutorial.png" id="2_1scrl"]
 [ext_resource type="Shader" uid="uid://66xftih27d17" path="res://Shaders/Tower.gdshader" id="2_tolab"]
 [ext_resource type="Script" uid="uid://dsc5hqxbda74i" path="res://Scripts/tower.gd" id="3_3lbbe"]
 [ext_resource type="Texture2D" uid="uid://b33w33hj65e1s" path="res://Sprites/lampada fiamma.png" id="3_yfk4l"]
@@ -20,6 +21,105 @@
 [ext_resource type="Script" uid="uid://jl34x3w4hm81" path="res://Scenes/button.gd" id="14_3vire"]
 [ext_resource type="Script" uid="uid://cdvrkls2htfxl" path="res://Scenes/win_area.gd" id="19_w56qm"]
 [ext_resource type="Script" uid="uid://j2gylf8n7rci" path="res://Scenes/death_area.gd" id="20_ynbq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1525"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1j8h"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahghi"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hed32"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt7ip"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n23a2"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etqb4"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qkjj"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g60c"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gir4y"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh87c"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(960, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p611b"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(1056, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vlpj"]
+atlas = ExtResource("2_1scrl")
+region = Rect2(1152, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7fv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1525")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1j8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahghi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hed32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt7ip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n23a2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etqb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qkjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g60c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gir4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh87c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p611b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vlpj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qfxak"]
 frequency = 0.0075
@@ -462,6 +562,14 @@ color = Color(0.15487596, 0.154876, 0.15487596, 1)
 light_mask = 7
 color = Color(0.18717626, 0.18717608, 0.18717623, 1)
 
+[node name="TutorialSprite" type="AnimatedSprite2D" parent="." unique_id=1866398707]
+visible = false
+modulate = Color(1, 1, 1, 0.44313726)
+position = Vector2(3, -38)
+sprite_frames = SubResource("SpriteFrames_q7fv0")
+frame = 5
+frame_progress = 0.098060645
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1686037406]
 layer = 2
 scroll_ignore_camera_zoom = true
@@ -511,17 +619,17 @@ icon_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="ParallaxBackground/PauseMenu" unique_id=605877433]
 layout_mode = 0
-offset_left = 195.0
+offset_left = 130.0
 offset_top = 90.0
-offset_right = 287.0
+offset_right = 222.0
 offset_bottom = 121.0
 text = "Continue"
 
 [node name="Main MenuButton" type="Button" parent="ParallaxBackground/PauseMenu" unique_id=1990996369]
 layout_mode = 0
-offset_left = 195.0
+offset_left = 131.0
 offset_top = 142.0
-offset_right = 291.0
+offset_right = 227.0
 offset_bottom = 173.0
 text = "Main Menu"
 
